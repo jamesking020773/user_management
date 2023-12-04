@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+
+class User
+{
+    public string Username { get; set; }
+    public string Password { get; set; }
+}
+
+class AuthenticationSystem
+{
+    private List<User> users;
+
+    public AuthenticationSystem()
+    {
+        users = new List<User>();
+    }
+
+    public void RegisterUser(string username, string password)
+    {
+        foreach (User user in users)
+        {
+            if (user.Username == username)
+            {
+                Console.WriteLine("Username already exists. Please choose a different username.");
+                return;
+            }
+        }
+
+        User newUser = new User { Username = username, Password = password };
+        users.Add(newUser);
+        Console.WriteLine("User registered successfully.");
+    }
+
+    public void Login(string username, string password)
+    {
+        foreach (User user in users)
+        {
+            if (user.Username == username && user.Password == password)
+            {
+                Console.WriteLine("Login successful. Welcome, " + username + "!");
+                return;
+            }
+        }
+
+        Console.WriteLine("Invalid username or password. Please try again.");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        AuthenticationSystem authenticationSystem = new AuthenticationSystem();
+
+        authenticationSystem.RegisterUser("user1", "password1");
+        authenticationSystem.RegisterUser("user2", "password2");
+
+        authenticationSystem.Login("user1", "password1");  // Successful login
+        authenticationSystem.Login("user3", "password3");  // Invalid user
+        authenticationSystem.Login("user1", "wrongpassword");  // Invalid password
+    }
+}
