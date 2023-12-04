@@ -1,0 +1,38 @@
+class User:
+    username
+    password
+
+    constructor(username, password):
+        self.username = username
+        self.password = password
+
+class AuthenticationSystem:
+    users[]
+
+    register_user(username, password):
+        for user in users:
+            if user.username == username:
+                print("Username already exists. Please choose a different username.")
+                return
+        
+        new_user = User(username, password)
+        users.append(new_user)
+        print("User registered successfully.")
+
+    login(username, password):
+        for user in users:
+            if user.username == username and user.password == password:
+                print("Login successful. Welcome, " + username + "!")
+                return
+        
+        print("Invalid username or password. Please try again.")
+
+# Usage
+authentication_system = AuthenticationSystem()
+
+authentication_system.register_user("user1", "password1")
+authentication_system.register_user("user2", "password2")
+
+authentication_system.login("user1", "password1")  # Successful login
+authentication_system.login("user3", "password3")  # Invalid user
+authentication_system.login("user1", "wrongpassword")  # Invalid password
